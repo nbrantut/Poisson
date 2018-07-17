@@ -31,7 +31,11 @@ function Q(nu,alpha)
 end
 
 function vpvs(nu)
-    return sqrt((2nu-1)/(2nu-1))
+    return sqrt((2nu-2)/(2nu-1))
+end
+
+function poisson(vpvs)
+    return (vpvs.^2-2)./(2*vpvs.^2 -2)
 end
 
 function GoverK(nu)
@@ -42,8 +46,24 @@ function Nu(k,g,nu0)
     return (3.0.*k - 2.0.*GoverK(nu0).*g)./(6.0.*k + 2.0*GoverK(nu0).*g)
 end
 
-function KGassmann(phi,z,Kd)
-    return Kd*(phi*(1-1/z) + 1-1/Kd)/(phi*(1-1/z)+Kd-1)
+function KGassmann(phi::Float64,z::Float64,Kd::Float64)
+    if abs(Kd-1.0)<=1e-12
+        return 1.0
+    else
+        return Kd.*(phi.*(1-1./z) + 1-1./Kd)./(phi.*(1-1./z)+Kd-1)
+    end
+end
+
+function KGassmann(phi::Array{Float64,1},z,Kd::Array{Float64,1})
+    out = similar(Kd)
+    for n=1:length(Kd)
+        if abs(Kd[n]-1.0)<=1e-12
+            out[n] = 1.0
+        else
+            out[n] = Kd[n].*(phi[n].*(1-1./z) + 1-1./Kd[n])./(phi[n].*(1-1./z)+Kd[n]-1)
+        end
+    end
+    return out
 end
 
 
@@ -98,8 +118,8 @@ function ode_rk4(func,u0,tspan,tol,p)
     k3=zeros(u0)
     k4=zeros(u0)
 
-    dt = (tspan[2]-tspan[1])/100
-    n=length(t)
+    dt = (tspan[2]-tspan[1])/1000
+    n = length(t)
     #loop
     while t[n]<tspan[2]
 
@@ -116,7 +136,7 @@ function ode_rk4(func,u0,tspan,tol,p)
         #check if in tolerance
         err = norm(y0-y1)
         if (err>tol) | (err<tol/10)
-            dt = dt*exp(0.2*log(tol/err))
+            dt *= exp(0.2*log(tol/err))
             y0 = y[n] + rk4step(k1, k2, k3, k4, func, p, y[n], t[n], dt)
         end
         push!(t,t[n]+dt)
