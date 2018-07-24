@@ -16,7 +16,7 @@ nu_sphere(a) = 0.2 - 16/875*(1-a).^2 - (1-a).^3 *(3017088*(5751377+23283*sqrt(59
 nu_needle = (7-sqrt(29))/8
 
 fig=figure()
-
+ax=gca()
 semilogx(logspace(-3,-0.5,50), nu_crack(logspace(-3,-0.5,50)), "k--", linewidth=1)
 plot(logspace(-0.7,0.3), nu_sphere(logspace(-0.7,0.3)), "k--", linewidth=1)
 plot([5;100], nu_needle*[1;1], "k--", linewidth=1)
@@ -44,4 +44,20 @@ annotate("needles",
          ha="center",
          va="center")
 
-exportfig(fig, "dry")
+ylim(0,0.25)
+
+ax2 = ax[:twinx]()
+ax2[:get_yaxis]()[:set_ticks_position]("right")
+ax2[:get_yaxis]()[:set_ticks](poisson([1.5, 1.6, 1.7]))
+ax2[:get_yaxis]()[:set_ticklabels](("1.5", "1.6", "1.7"))
+ax2[:get_yaxis]()[:set_label_position]("right")
+ax2[:set_ylabel]("\$V_\\mathrm{P}/V_\\mathrm{S}\$ ratio", usetex="true")
+ax2[:set_ylim](ax[:get_ylim]())
+ax2[:set_visible]("true")
+
+
+
+
+
+
+exportfig(fig, "dry", xsize=9)
