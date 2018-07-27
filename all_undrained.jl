@@ -122,6 +122,10 @@ annotate("\$\\alpha=10^{-3}\$\n\$\\zeta=10^{-3}\$",
          ha="right",
          va="bottom",
          usetex="true")
+annotate("(a)",
+         xy=[xl[1],yl[2]],
+         ha="left",
+         va="top")
 sca(AX[2])
 xl = xlim()
 yl = ylim()
@@ -130,6 +134,10 @@ annotate("\$\\alpha=10^{-1}\$\n\$\\zeta=10^{-3}\$",
          ha="right",
          va="bottom",
          usetex="true")
+annotate("(b)",
+         xy=[xl[1],yl[2]],
+         ha="left",
+         va="top")
 sca(AX[3])
 xl = xlim()
 yl = ylim()
@@ -138,6 +146,10 @@ annotate("\$\\alpha=1\$\n\$\\zeta=10^{-3}\$",
          ha="right",
          va="bottom",
          usetex="true")
+annotate("(c)",
+         xy=[xl[1],yl[2]],
+         ha="left",
+         va="top")
 sca(AX[4])
 xl = xlim()
 yl = ylim()
@@ -146,6 +158,10 @@ annotate("\$\\alpha=10^{-3}\$\n\$\\zeta=10^{-2}\$",
          ha="right",
          va="bottom",
          usetex="true")
+annotate("(d)",
+         xy=[xl[1],yl[2]],
+         ha="left",
+         va="top")
 sca(AX[5])
 xl = xlim()
 yl = ylim()
@@ -154,6 +170,10 @@ annotate("\$\\alpha=10^{-1}\$\n\$\\zeta=10^{-2}\$",
          ha="right",
          va="bottom",
          usetex="true")
+annotate("(e)",
+         xy=[xl[1],yl[2]],
+         ha="left",
+         va="top")
 sca(AX[6])
 xl = xlim()
 yl = ylim()
@@ -162,6 +182,10 @@ annotate("\$\\alpha=1\$\n\$\\zeta=10^{-2}\$",
          ha="right",
          va="bottom",
          usetex="true")
+annotate("(f)",
+         xy=[xl[1],yl[2]],
+         ha="left",
+         va="top")
 sca(AX[7])
 xl = xlim()
 yl = ylim()
@@ -170,6 +194,10 @@ annotate("\$\\alpha=10^{-3}\$\n\$\\zeta=10^{-1}\$",
          ha="right",
          va="bottom",
          usetex="true")
+annotate("(g)",
+         xy=[xl[1],yl[2]],
+         ha="left",
+         va="top")
 sca(AX[8])
 xl = xlim()
 yl = ylim()
@@ -178,6 +206,10 @@ annotate("\$\\alpha=10^{-1}\$\n\$\\zeta=10^{-1}\$",
          ha="right",
          va="bottom",
          usetex="true")
+annotate("(h)",
+         xy=[xl[1],yl[2]],
+         ha="left",
+         va="top")
 sca(AX[9])
 xl = xlim()
 yl = ylim()
@@ -186,6 +218,10 @@ annotate("\$\\alpha=1\$\n\$\\zeta=10^{-1}\$",
          ha="right",
          va="bottom",
          usetex="true")
+annotate("(i)",
+         xy=[xl[1],yl[2]],
+         ha="left",
+         va="top")
 
 
 

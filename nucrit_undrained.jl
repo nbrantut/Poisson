@@ -2,7 +2,7 @@ include("exportfig.jl")
 include("dem.jl")
 using PyPlot
 
-z0=[0.001 0.01 0.05 0.1]
+z0=[0 0.001 0.01 0.05 0.1]
 Nz0=length(z0)
 
 Nnu=250
@@ -21,14 +21,18 @@ nuc_needle(z) = (7-sqrt(29))/8 + (203+36*sqrt(29)).*z/522
 fig = figure()
 ax = gca()
 
-for k=1:Nz0
+
+contour(tabalpha,tabnu,dnu[:,:,1]',[0], colors=[0.6 0.6 0.6],linewidths=1)
+
+for k=2:Nz0
     semilogx(logspace(-3,-1,50), nuc_crack(logspace(-3,-1,50),z0[k]), "k--", linewidth=1)
     #plot(10.^[-.5;.5], nuc_sphere(z0[k])*[1;1], "k--", linewidth=1)
     plot(1, nuc_sphere(z0[k]), "k.", linewidth=1)
     plot([5;100], nuc_needle(z0[k])*[1;1], "k--", linewidth=1)
     contour(tabalpha,tabnu,dnu[:,:,k]',[0], colors="k",linewidths=1)
-    plot([1;1],[0.47,0.5],"k-",linewidth=0.5)
 end
+
+plot([1;1],[0.47,0.5],"k-",linewidth=0.5)
 
 ylim(0,0.5)
 xlabel("aspect ratio, \$\\alpha\$",usetex="true")
@@ -81,5 +85,11 @@ annotate(L"10^{-3}",
          ha="left",
          va="bottom",
          usetex="true")
+annotate("dry (\$\\zeta=0\$)",
+         xy=[0.0011, 0.002],
+         usetex="true",
+         ha="left",
+         va="bottom",
+         color=(0.6,0.6,0.6))
 
 exportfig(fig, "nucrit_undrained", xsize=12, ysize=9)

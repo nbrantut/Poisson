@@ -26,7 +26,7 @@ plot([1;1],[0.23,0.25],"k-",linewidth=0.5)
 xlabel("aspect ratio, \$\\alpha\$",usetex="true")
 ylabel("critical Poisson's ratio, \$\\nu_\\mathrm{fixed}\$",usetex="true")
 
-annotate("dry limit\n\$\\zeta\\rightarrow 0\$",usetex="true",
+annotate("dry limit\n\$\\zeta= 0\$",usetex="true",
          xy=[100, 0],
          ha="right",
          va="bottom")
