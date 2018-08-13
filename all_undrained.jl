@@ -22,6 +22,7 @@ tol = 1e-6
 
 #initialise solution arrays
 NU  = Array{Array{Float64,1}}(Nn,Na,Nz)
+#NUDRY = Array{Array{Float64,1}}(Nn,Na)
 PHI = Array{Array{Float64,1}}(Nn,Na,Nz)
 AX = Array{PyCall.PyObject,1}(Nn*Na*Nz)
 
@@ -38,6 +39,7 @@ for i in eachindex(nu0), j in eachindex(a0), k in eachindex(z0)
 
     kg = KGassmann(phi, z0[k], getitem(y,1))
 
+    #NUDRY[i,j] = Nu(getitem(y,1),getitem(y,2),nu0[i])
     NU[i,j,k]  = Nu(kg,getitem(y,2),nu0[i])
     PHI[i,j,k] = phi
     
@@ -54,6 +56,7 @@ for k=1:Nz, j=1:Na
     ax = AX[ipl]
 
     for i=1:Nn
+        #plot(PHI[i,j,k]*100, NUDRY[i,j], color=0.8*[1,1,1],linewidth=1)
         plot(PHI[i,j,k]*100, NU[i,j,k], "k", linewidth=1)
         ylim(0,0.5)
     end
@@ -94,8 +97,8 @@ for k=1:Nz, j=1:Na
         ax2 = ax[:twinx]()
         
         ax2[:get_yaxis]()[:set_ticks_position]("right")
-        ax2[:get_yaxis]()[:set_ticks](poisson([1.6, 1.7, 1.8, 2.0, 2.4, 3.0]))
-        ax2[:get_yaxis]()[:set_ticklabels](("1.6", "1.7", "1.8", "2.0", "2.4", "3.0"))
+        ax2[:get_yaxis]()[:set_ticks](poisson([1.5, 1.6, 1.7, 1.8, 2.0, 2.4, 3.0]))
+        ax2[:get_yaxis]()[:set_ticklabels](("1.5","1.6", "1.7", "1.8", "2.0", "2.4", "3.0"))
         ax2[:get_yaxis]()[:set_label_position]("right")
         ax2[:set_ylabel]("\$V_\\mathrm{P}/V_\\mathrm{S}\$ ratio", usetex="true")
         ax2[:set_ylim](ax[:get_ylim]())

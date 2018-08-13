@@ -40,17 +40,17 @@ ylabel("critical Poisson's ratio, \$\\nu_{0,\\mathrm{crit}}\$",usetex="true")
 
 ax2 = ax[:twinx]()
 ax2[:get_yaxis]()[:set_ticks_position]("right")
-ax2[:get_yaxis]()[:set_ticks](poisson([1.6, 1.7, 1.8, 2.0, 2.4, 3.0]))
-ax2[:get_yaxis]()[:set_ticklabels](("1.6", "1.7", "1.8", "2.0", "2.4", "3.0"))
+ax2[:get_yaxis]()[:set_ticks](poisson([1.5, 1.6, 1.7, 1.8, 2.0, 2.4, 3.0]))
+ax2[:get_yaxis]()[:set_ticklabels](("1.5","1.6", "1.7", "1.8", "2.0", "2.4", "3.0"))
 ax2[:get_yaxis]()[:set_label_position]("right")
-ax2[:set_ylabel]("\$V_\\mathrm{P}/V_\\mathrm{S}\$ ratio", usetex="true")
+ax2[:set_ylabel]("critical \$V_\\mathrm{P}/V_\\mathrm{S}\$ ratio", usetex="true")
 ax2[:set_ylim](ax[:get_ylim]())
 ax2[:set_visible]("true")
 
-annotate("undrained limit",usetex="true",
-         xy=[100, 0],
-         ha="right",
-         va="bottom")
+#annotate("undrained limit",usetex="true",
+#         xy=[100, 0],
+#         ha="right",
+#         va="bottom")
 
 annotate("cracks",
          usetex="true",
