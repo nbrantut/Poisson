@@ -1,0 +1,24 @@
+* Differential Effective Medium Scheme for fluid saturated rocks: Poisson ratio computations
+
+This set of Julia codes has been developed to compute the effect of fluids on the evolution of Poisson's ratio in rocks. We use the Differential Effective Medim scheme to compute effective elastic propoerties of isotropic solids fluid-saturated spheroidal inclusions.
+
+We notably report a full implementation of the pore shear and bulk compliances in the general spheroid geometry. This implementation is from a direct translation of analytical results obtained in Maple by ECD, and did not involve manual transcriptions.
+
+** Installation
+Clone the repository or copy the files into your working folder.
+
+** Usage
+
+The file =dem.jl= contains all the functions required to perform DEM computations, including a (crude) implementation of the RK4 ODE solver, for completeness.
+
+All the scripts use the function =exportfig.jl= (which require Pyplot) to produce pdf figures, which is what we used (without further modifications) in the manuscript.
+
+** Authors
+
+The codes have been written by Emmanuel David and Nicolas Brantut (University College London, UK).
+
+** Referencing
+
+This set of codes forms the basis of the following manuscript:
+
+Brantut N. and E. C. David, *Effect of fluids on Vp/Vs ratio: Increase or decrease?*, submitted to /Geophys. J. Int./. 

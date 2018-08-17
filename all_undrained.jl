@@ -111,6 +111,10 @@ for k=1:Nz, j=1:Na
         ax[:get_xaxis]()[:set_ticklabels]("")
     else
         ax[:set_xlabel]("porosity, \$\\phi\$ (\\%)", usetex="true")
+        if a0[j]<0.01
+            ax[:get_xaxis]()[:set_ticklabels](("0.00","0.25", "0.50", "0.75", "1.0"))
+        end
+        
     end
     
     
