@@ -21,12 +21,12 @@ phispan = (0.0,0.95)
 tol = 1e-6
 
 #initialise solution arrays
-NU  = Array{Array{Float64,1}}(Nn,Na,Nz)
+NU  = Array{Array{Float64,1}}(undef,Nn,Na,Nz)
 #NUDRY = Array{Array{Float64,1}}(Nn,Na)
-PHI = Array{Array{Float64,1}}(Nn,Na,Nz)
-AX = Array{PyCall.PyObject,1}(Nn*Na*Nz)
+PHI = Array{Array{Float64,1}}(undef,Nn,Na,Nz)
+AX = Array{PyPlot.PyCall.PyObject,1}(undef,Nn*Na*Nz)
 
-dndp_crack(n0,a,z) = (20-34n0)./(45pi*a) + (1-n0)/3*(1-1./z) 
+dndp_crack(n0,a,z) = (20-34n0)./(45pi*a) + (1-n0)/3*(1-1.0./z) 
 dndp_sphere(n0,z)  = 1.5*(1-5n0-n0^2+5n0^3)/(7-5n0) + 0.75*(1-n0-n0^2+n0^3)/(1-2n0)*z
 dndp_needle(n0,z)  = (5-23n0-12n0^2+16n0^3)/15 + (25-15n0-24n0^2+16n0^3)/(27*(1-2n0))*z
 
@@ -65,10 +65,10 @@ for k=1:Nz, j=1:Na
     if a0[j]<=0.01
         xlim(0,1)
         if a0[j]<z0[k]
-            phirange= linspace(0,.25e-2)
+            phirange= linspace(0,.25e-2,50)
             for i=1:Nn
                 plot(phirange*100,
-                     nu0[i] + phirange*dndp_crack(nu0[i],a0[j],z0[k]),
+                     nu0[i] .+ phirange*dndp_crack(nu0[i],a0[j],z0[k]),
                      "k--",
                      linewidth=1)
             end
@@ -78,10 +78,10 @@ for k=1:Nz, j=1:Na
     end
 
     if a0[j]>=1
-        phirange= linspace(0,50e-2)
+        phirange= linspace(0,50e-2,50)
         for i=1:Nn
             plot(phirange*100,
-                 nu0[i] + phirange*dndp_sphere(nu0[i],z0[k]),
+                 nu0[i] .+ phirange*dndp_sphere(nu0[i],z0[k]),
                  "k--",
                  linewidth=1)
         end

@@ -1,3 +1,14 @@
+using LinearAlgebra
+
+function logspace(n1, n2, N=50)
+    return exp10.(range(n1; length=N, stop=n2))
+end
+
+function linspace(n1, n2, N=50)
+    return range(n1; length=N, stop=n2)
+end
+
+
 function spheroidgeometry(alpha)
     if (alpha < 1)
         g = alpha * (acos(alpha) - alpha * sqrt(0.1e1 - alpha ^ 2)) * (0.1e1 - alpha ^ 2) ^ (-0.3e1 / 0.2e1)
@@ -35,7 +46,7 @@ function vpvs(nu)
 end
 
 function poisson(vpvs)
-    return (vpvs.^2-2)./(2*vpvs.^2 -2)
+    return (vpvs.^2 .- 2.0)./(2.0.*vpvs.^2 .- 2.0)
 end
 
 function GoverK(nu)
@@ -50,7 +61,7 @@ function KGassmann(phi::Float64,z::Float64,Kd::Float64)
     if abs(Kd-1.0)<=1e-12
         return 1.0
     else
-        return Kd.*(phi.*(1-1./z) + 1-1./Kd)./(phi.*(1-1./z)+Kd-1)
+        return Kd.*(phi.*(1-1.0./z) + 1-1.0./Kd)./(phi.*(1-1.0./z)+Kd-1)
     end
 end
 
@@ -60,7 +71,7 @@ function KGassmann(phi::Array{Float64,1},z,Kd::Array{Float64,1})
         if abs(Kd[n]-1.0)<=1e-12
             out[n] = 1.0
         else
-            out[n] = Kd[n].*(phi[n].*(1-1./z) + 1-1./Kd[n])./(phi[n].*(1-1./z)+Kd[n]-1)
+            out[n] = Kd[n].*(phi[n].*(1-1.0./z) + 1-1.0./Kd[n])./(phi[n].*(1-1.0./z)+Kd[n]-1)
         end
     end
     return out
@@ -96,7 +107,7 @@ function DEMKGunrelaxed(dm,m,p,phi)
 end
 
 function getitem(A::Array{Array{Float64,1},1},i::Int)
-    a = Array{typeof(A[1][i])}(length(A))
+    a = Array{typeof(A[1][i])}(undef,length(A))
     for (ind,el) in enumerate(A)
         a[ind] = el[i]
     end
@@ -106,17 +117,17 @@ end
 
 function ode_rk4(func,u0,tspan,tol,p)
     t = Float64[]  
-    y = Array{typeof(u0)}(0)
+    y = Array{typeof(u0)}(undef,0)
 
     #initialise
     push!(t,tspan[1])
     push!(y,u0)
 
     #initialise bunch of shit
-    k1=zeros(u0)
-    k2=zeros(u0)
-    k3=zeros(u0)
-    k4=zeros(u0)
+    k1=zeros(size(u0))
+    k2=zeros(size(u0))
+    k3=zeros(size(u0))
+    k4=zeros(size(u0))
 
     dt = (tspan[2]-tspan[1])/1000
     n = length(t)

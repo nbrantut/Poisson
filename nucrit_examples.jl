@@ -23,7 +23,7 @@ fig = figure()
 ax = gca()
 
 for k=1:Nz0
-    contour(tabalpha,tabnu,dnu[:,:,k]',[0], colors="k",linewidths=1)
+    contour(tabalpha,tabnu,permutedims(dnu[:,:,k]),[0], colors="k",linewidths=1)
 end
 
 for k=1:Nz0-1
@@ -39,7 +39,7 @@ annotate("\$\\zeta="*string(z0[Nz0])*"\$",
          ha="right",
          va="bottom")
 
-rec = Array{Any,1}(4)
+rec = Array{Any,1}(undef,4)
 #gyp dhy
 rec[1] = matplotlib[:patches][:Rectangle](
     xy=[0.04,0.33],

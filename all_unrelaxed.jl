@@ -21,8 +21,8 @@ phispan = (0.0,0.95)
 tol = 1e-9
 
 #initialise solution arrays
-NU  = Array{Array{Float64,1}}(Nn,Na,Nz)
-PHI = Array{Array{Float64,1}}(Nn,Na,Nz)
+NU  = Array{Array{Float64,1}}(undef,Nn,Na,Nz)
+PHI = Array{Array{Float64,1}}(undef,Nn,Na,Nz)
 
 for i in eachindex(nu0), j in eachindex(a0), k in eachindex(z0)
     
